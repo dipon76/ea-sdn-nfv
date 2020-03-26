@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="sdn"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="sdn">
+				<Option output="/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug/sdn" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/dipon/usdn2/usdn/examples/sdn/."/>
+					<Add directory="/home/dipon/usdn2/usdn/examples/sdn/controller"/>
+					<Add directory="/home/dipon/usdn2/usdn/examples/sdn/node"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug/Makefile&quot;  VERBOSE=1 sdn"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="sdn/fast">
+				<Option output="/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug/sdn" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/dipon/usdn2/usdn/examples/sdn/."/>
+					<Add directory="/home/dipon/usdn2/usdn/examples/sdn/controller"/>
+					<Add directory="/home/dipon/usdn2/usdn/examples/sdn/node"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/8/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug/Makefile&quot;  VERBOSE=1 sdn/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/dipon/usdn2/usdn/examples/sdn/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/dipon/usdn2/usdn/examples/sdn/controller/controller-conf.h">
+			<Option target="sdn"/>
+		</Unit>
+		<Unit filename="/home/dipon/usdn2/usdn/examples/sdn/controller/sdn-controller.c">
+			<Option target="sdn"/>
+		</Unit>
+		<Unit filename="/home/dipon/usdn2/usdn/examples/sdn/controller/symbols.c">
+			<Option target="sdn"/>
+		</Unit>
+		<Unit filename="/home/dipon/usdn2/usdn/examples/sdn/controller/symbols.h">
+			<Option target="sdn"/>
+		</Unit>
+		<Unit filename="/home/dipon/usdn2/usdn/examples/sdn/node/sdn-udp-client-repo.c">
+			<Option target="sdn"/>
+		</Unit>
+		<Unit filename="/home/dipon/usdn2/usdn/examples/sdn/node/sdn-udp-client.c">
+			<Option target="sdn"/>
+		</Unit>
+		<Unit filename="/home/dipon/usdn2/usdn/examples/sdn/node/sdn-udp-client_nfv.c">
+			<Option target="sdn"/>
+		</Unit>
+		<Unit filename="/home/dipon/usdn2/usdn/examples/sdn/node/sdn-udp-client_udp.c">
+			<Option target="sdn"/>
+		</Unit>
+		<Unit filename="/home/dipon/usdn2/usdn/examples/sdn/node/symbols.c">
+			<Option target="sdn"/>
+		</Unit>
+		<Unit filename="/home/dipon/usdn2/usdn/examples/sdn/node/symbols.h">
+			<Option target="sdn"/>
+		</Unit>
+		<Unit filename="/home/dipon/usdn2/usdn/examples/sdn/project-conf.h">
+			<Option target="sdn"/>
+		</Unit>
+		<Unit filename="/home/dipon/usdn2/usdn/examples/sdn/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
