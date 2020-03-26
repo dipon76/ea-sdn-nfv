@@ -72,3 +72,7 @@ EA-SDN/NFV implementation details
 - configuration files */core/net/sdn* 
 - heuristic files */apps/atom* 
 
+Simulation
+---
+- The Cooja simulator is integrated in the Code base. go to '/usdn/tools/cooja' and run the command 'ant run'
+- the topology file provided in the */examples/sdn* can be used or any new file can be created. 
