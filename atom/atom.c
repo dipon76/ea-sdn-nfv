@@ -72,6 +72,7 @@ uip_ipaddr_t controller_addr;
 /* All applications */
 const struct atom_app *all_apps[] = ATOM_APPS;
 #define NUM_APPS (sizeof(all_apps) / sizeof(struct atom_app *))
+#define DEFAULT_CAPACITY 3;
 
 /* All southbound connectors */
 const struct atom_sb *all_sb[] = ATOM_SB_CONNECTORS;
@@ -454,6 +455,7 @@ depth_first_search2(atom_node_t *src, atom_node_t *dest)
 static void
 init(void) {
   LOG_INFO("Atom shortest path routing app initialised\n");
+  capacity[40]= {DEFAULT_CAPACITY};
 }
 static int get_link_cost(int *list){
   int cost = 0;
@@ -704,6 +706,7 @@ PROCESS_THREAD(controller_process, ev, data)
       /* Get the first packet on the queue and put it on the cbuf */
       m = atom_buffer_head();
       /* Run atom apps for input */
+
       atom_run(m->sb);
       
       /* Free the message from the input queue */
