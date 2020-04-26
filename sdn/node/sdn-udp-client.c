@@ -106,6 +106,9 @@
 #ifndef CONF_APP_BR_MAX
   #define CONF_APP_BR_MAX   75
 #endif
+#ifndef DEFAULT_CAPACITY
+  #define DEFAULT_CAPACITY   2
+#endif
 
 #define UDP_RPORT 8765
 #define UDP_LPORT 5678
@@ -122,9 +125,11 @@ static mflow_t *apps[CONF_NUM_APPS];
 static uip_ipaddr_t udp_server_addr;           // udp server address
 static uip_ipaddr_t nfv_tx_add;
 static mflow_t *nfv_tx_app;
-static uint8_t *BUF;
+static uint8_t BUF[DEFAULT_CAPACITY][100];
+static uint8_t flag[DEFAULT_CAPACITY];
+static uint8_t assigned-src[40];
 static int count = 0;
-static int aggregate = 0;
+static int aggregate[DEFAULT_CAPACITY] = {0};
 static sdn_ft_entry_t *primary_entry;
 static sdn_ft_entry_t *secondary_entry;
 static int entry = 0;
@@ -222,14 +227,15 @@ static int get_length(int* a){
   return i;
 }
 
-static void aggregate (void){
+static void aggregate (int id){
   int sum = 0; 
   int i = 0;
-  while(BUF[i] != 0){
-    sum +=BUF[i];
+  while(BUF[id] != 0){
+    sum +=BUF[id][i];
+    BUF[id][i] = 0;
     i++;
   }
-  aggregate = (int)(sum/i);
+  aggregate[id] = (int)(sum/i);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -265,8 +271,14 @@ send(mflow_t *a)
 #endif /* UIP_CONF_IPV6_SDN */
         if(IS_TX_NODE(node_id))
           sprintf((char *)buf + pos, "a:%d id:%d", a->id, a->seq);
-        if(IS_NFV_NODE(node_id))
-          sprintf((char *)buf + pos, "a:%d id:%d", aggregate, a->seq);
+        if(IS_NFV_NODE(node_id)){
+          for (int i = 0; i < DEFAULT_CAPACITY; ++i)
+          {
+            /* code */
+            if (aggregate[i]!=0)
+            sprintf((char *)buf + pos, "a:%d id:%d", aggregate[i], a->seq);
+          }
+        }
         /*TX APP src dest appid appseq */
         LOG_STAT("TX APP s:%d d:%d length:%d %s\n",
           node_id,
@@ -347,11 +359,22 @@ app_timer_callback(mflow_t *a) {
 }
 #endif /* BUILD_WITH_MULTIFLOW */
 
+static uint8_t get_srcId(uint8_t src){
+  int i;
+  for (int i = 0; i < 40; ++i)
+  {
+    if (assigned-src[i] == src) return i;
+  }
+  return -1;
+}
 
+static uint8_t get_pos(uint8_t src){
+  return flag[src_port];
+}
 
 #ifdef BUILD_WITH_MULTIFLOW
 static void 
-buffer_callback(mflow_t *a,const uint8_t *data, uint16_t datalen){
+buffer_callback(mflow_t *a,uint8_t src, const uint8_t *data, uint16_t datalen){
   printf("I am in buffer_callback\n");
   char buf[15] = {0};
   int pos = 0;
@@ -361,12 +384,15 @@ buffer_callback(mflow_t *a,const uint8_t *data, uint16_t datalen){
   pos += USDN_H_LEN;
 #endif
   memcpy(&buf, data + pos, datalen);
-  BUF[count] = (uint8_t)buf[2]; 
-  count++;
-  if(count == 10){
+  int id = get_pos(src);
+  int id2 = get_srcId(src); 
+  BUF[id2][id] = (uint8_t)buf[2]; 
+  flag[id2]++;
+  
+  if(flag[id2] == 10){
     count = 0;
-    aggregate();
-    mflow_new_sendinterval(nfv_tx_app, 3);
+    aggregate(id2);
+    mflow_new_sendinterval(nfv_tx_app, 1);
     send(nfv_tx_app);
   }
 }
@@ -409,9 +435,9 @@ app_rx_callback(mflow_t *a,
     datalen,
     (char *)buf);
 
-    if ( IS_NFV_NODE(node_id)){
+  if ( IS_NFV_NODE(node_id)){
     printf("I have reached the Receiving node: %d\n", node_id );
-    buffer_callback(a,data,datalen);
+    buffer_callback(a,source_addr->u8[15],data,datalen);
   }
 
   
@@ -483,12 +509,21 @@ init(void)
 static void nfv_init(void){
   uip_ip6addr(&nfv_tx_add, UIP_DS6_DEFAULT_PREFIX, 0, 0, 0, 0x200, 0, 0,
                   1);
+
     nfv_tx_app = mflow_new(1, &nfv_tx_add, UDP_LPORT, UDP_RPORT,
                              120, 60, 75,
                              nfv_rx_callback,
                              app_timer_callback);
-
-    BUF[100] = {0};
+    int i;
+    assigned-src[] = NFV_CONF.source;
+    int srclistLength = get_length(assigned-src);
+    for (i =0; i<srclistLength; i++){
+      int j;
+      for (j =0; j<srclistLength; j++){
+        BUF[i][j]= 0;
+      }
+      flag[i]=0;
+    }
 
     
 }

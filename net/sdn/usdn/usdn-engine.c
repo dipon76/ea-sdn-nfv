@@ -85,6 +85,28 @@ static uint8_t            databuf[60];
 /*---------------------------------------------------------------------------*/
 /* PRINTING */
 /*---------------------------------------------------------------------------*/
+static  void
+division(unsigned long x, unsigned long y)
+{
+  unsigned int a = (unsigned int)((100L * x) / y);
+  unsigned int b = (unsigned int)((10000L * x / y) - (100L * x / y) * 100);
+  if(b < 0) {
+    b = (~b + 1);
+  }
+  printf("%02u.%02u", a, b % 100);
+}
+
+int get_energy(void){
+  unsigned long all_cpu, all_lpm;
+  energest_flush();
+
+  /* Get current energest times (to date) */
+  all_cpu = energest_type_time(ENERGEST_TYPE_CPU) / (RTIMER_SECOND / 1000);
+  all_lpm = energest_type_time(ENERGEST_TYPE_LPM) / (RTIMER_SECOND / 1000);
+  int energy = (int)all_cpu + (int)all_lpm; 
+  return energy;
+}
+
 void
 print_usdn_header(usdn_hdr_t *hdr)
 {
@@ -292,6 +314,18 @@ cfg_input(void *data) {
   SDN_ENGINE.controller_update(SDN_TMR_STATE_IMMEDIATE);
 }
 /*---------------------------------------------------------------------------*/
+static void
+nfv_input(void *data) {
+  unfv_cfg_t *cfg = (unfv_cfg_t *)data;
+  LOG_DBG("Setting NFV Configuration...\n");
+
+
+  NFV_CONF.nfv-node = cfg->nfv-node;
+  NFV_CONF.source[] = cfg->source;
+
+  /* Immediately update/ack the controller (to say we have been configured) */
+  SDN_ENGINE.controller_update(SDN_TMR_STATE_IMMEDIATE);
+/*---------------------------------------------------------------------------*/
 /* Message Handling Out */
 /*---------------------------------------------------------------------------*/
 static void
@@ -338,6 +372,7 @@ nsu_output(void *buf)
 
   /* Set node information */
   nsu->cfg_id = SDN_CONF.cfg_id;
+  nsu->energy = get_energy();
   rpl_dag_t *dag = rpl_get_any_dag();
   if(dag != NULL) {
       nsu->rank = DAG_RANK(dag->rank, dag->instance) - 1;
@@ -483,6 +518,9 @@ in(void *data, uint8_t length, void *ptr)
       break;
     case USDN_MSG_CODE_CFG:
       cfg_input(data + USDN_H_LEN);
+      break;
+    case USDN_MSG_CODE_NFV:
+      nfv_input(data + USDN_H_LEN);
       break;
     default:
       LOG_ERR("IN Unknown message type!");

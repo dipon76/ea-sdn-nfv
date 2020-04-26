@@ -56,6 +56,7 @@ typedef enum USDN_CODE {
   USDN_MSG_CODE_FTS,
   USDN_MSG_CODE_TRACKRQ,
   USDN_MSG_CODE_DATA,
+  USDN_MSG_CODE_NFV,
 } usdn_msg_code_t;
 
 #define USDN_CODE_STRING(code) \
@@ -67,6 +68,7 @@ typedef enum USDN_CODE {
   (code == USDN_MSG_CODE_FTQ) ? ("FTQ") : \
   (code == USDN_MSG_CODE_FTS) ? ("FTS") : \
   (code == USDN_MSG_CODE_TRACKRQ) ? ("TR") : \
+  (code == USDN_MSG_CODE_NFV) ? ("NFV") : \
   (code == USDN_MSG_CODE_DATA) ? ("DATA") : "UNKNOWN")
 
 /* Offset values for various uSDN header fields */
@@ -89,6 +91,7 @@ typedef struct usdn_nsu_link {
   sdn_node_id_t nbr_id;
   // uint16_t      etx;
   int16_t       rssi;
+  
   // uint8_t       is_fresh;
 } usdn_nsu_link_t;
 
@@ -96,6 +99,7 @@ typedef struct usdn_nsu {
   /* Node Info */
   uint8_t         cfg_id;
   uint8_t         rank;
+  uint8_t       energy;
   /* Link Info */
   uint8_t         num_links;
   usdn_nsu_link_t links[];

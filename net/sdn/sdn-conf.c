@@ -60,6 +60,7 @@ sdn_conf_init(void)
   SDN_CONF.query_len =           SDN_CONF_QUERY_LENGTH;
   SDN_CONF.rpl_dio_interval =    RPL_DIO_INTERVAL_MIN;
   SDN_CONF.rpl_dfrt_lifetime =   RPL_DEFAULT_LIFETIME;
+  SDN_CONF.lifetime =  LIFETIME;
   sdn_conf_print();
 }
 
@@ -75,7 +76,8 @@ sdn_conf_print(void){
           " ...Query Index: %d\n"             \
           " ...Query Length: %d\n"            \
           " ...RPL DIO Interval: 2^%dms\n"    \
-          " ...RPL DFRT Lifetime: %dmins\n",
+          " ...RPL DFRT Lifetime: %dmins\n"   \
+          " ...Lifetime: %fmj\n",
           SDN_CONF.sdn_net,
           SDN_CONF.cfg_id,
           SDN_CONF.hops,
@@ -84,7 +86,8 @@ sdn_conf_print(void){
           SDN_CONF.query_idx,
           SDN_CONF.query_len,
           SDN_CONF.rpl_dio_interval,
-          SDN_CONF.rpl_dfrt_lifetime);
+          SDN_CONF.rpl_dfrt_lifetime,
+          SDN_CONF.lifetime;);
 }
 /*----------------------------------------------------------------------------*/
 /** @} */

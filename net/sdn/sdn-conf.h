@@ -128,6 +128,11 @@ typedef struct sdn_configuration {
   uint8_t       rpl_dfrt_lifetime;    /* RPL_DEFAULT_LIFETIME */
 } sdn_cfg_t;
 
+typedef struct nfv_configuration {
+  uint8_t       nfv-node;
+  uint8_t       source;
+} nfv_cfg_t;
+
 /* Allow the configuration to be accessed globally */
 extern sdn_cfg_t SDN_CONF;
 
